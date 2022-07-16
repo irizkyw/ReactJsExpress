@@ -1,26 +1,18 @@
-// import Users from '../models/Users'
+const models  = require('./../models');
 
-class UsersController {
-  static getAllUsers(req, res) {
-    return res.json([
-      {
-        id: 1,
-        username: "A",
-      },
-      {
-        id: 2,
-        username: "B",
-      },
-      {
-        id: 3,
-        username: "C",
-      },
-      {
-        id: 4,
-        username: "D",
-      },
-    ]);
-  }
+module.exports = {
+    async getAll(req, res) {
+        try {
+            const users = await models.users.findAll();
+            if(!users) {
+                return res.status(404).send({
+                    message: 'No users found'
+                });
+            }
+            return res.json(users);
+        }
+        catch (err) {
+            return res.status(500).json({ error: err.message });
+        }
+    }
 }
-
-module.exports = UsersController;
