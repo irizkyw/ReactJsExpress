@@ -1,27 +1,9 @@
-var express = require("express");
-var router = express.Router();
+const express = require('express'); //import express
+const userController = require('../controller/UserController'); 
 
-/* GET users listing. */
-router.get("/", function (req, res, next) {
-  // res.send('respond with a resource');
-  res.json([
-    {
-      id: 1,
-      username: "A",
-    },
-    {
-      id: 2,
-      username: "B",
-    },
-    {
-      id : 3,
-      username : "C"
-    },
-    {
-      id : 4,
-      username : "D"
-    }
-  ]);
-});
+const router  = express.Router(); 
 
-module.exports = router;
+router.get('/', userController.getAllUsers); 
+
+
+module.exports = router; // export to use in server.js
