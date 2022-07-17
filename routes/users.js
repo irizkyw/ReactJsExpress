@@ -3,8 +3,8 @@ const userController = require('../controller/UserController');
 
 const router  = express.Router(); 
 
-router.get('/', userController.getAll);
-router.get('/:id',userController.getID);
+router.get('/api', userController.getAll);
+router.get('/api/:id',userController.getID);
 
 
 module.exports = router; // export to use in server.js
