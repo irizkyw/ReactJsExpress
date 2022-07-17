@@ -1,10 +1,12 @@
-const express = require('express'); //import express
-const userController = require('../controller/UserController'); 
+const express = require('express');
+const UserController = require('../controller/UserController');
 
 const router  = express.Router(); 
 
-router.get('/api', userController.getAll);
-router.get('/api/:id',userController.getID);
+router.get('/api', UserController.getAll);
+router.get('/api/search/:id',UserController.getID);
+router.get('/api/delete/:id',UserController.getDelete);
+router.get('/api/update/:id',UserController.putEdit);
 
 
-module.exports = router; // export to use in server.js
+module.exports = router;
