@@ -17,10 +17,9 @@ class UserController {
 
   static async postUsers(req, res) {
     const schema = {
-      name: "string ",
+      username: "string ",
       email: "string ",
       password: "string ",
-      roles_id: "int",
     };
     try {
       const validate = v.validate(req.body,schema);
@@ -29,7 +28,7 @@ class UserController {
       }
       const users = await User.create(req.body);
       return res.json(users)
-    } catch {
+    } catch(err) {
       return res.status(500).json({ error: err.message });
     }
   }
@@ -39,14 +38,14 @@ class UserController {
       const id = req.params.id;
       const users = await User.findByPk(id);
       return res.json(users || {});
-    } catch {
+    } catch(err) {
       return res.status(500).json({ error: err.message });
     }
   }
 
   static async putEdit(req, res) {
     const schema = {
-      name: "string | optional",
+      username: "string | optional",
       email: "string | optional",
       password: "string | optional",
       roles_id: "optional",
@@ -60,7 +59,7 @@ class UserController {
       }
       users = await users.update(req.body);
       return res.json(users);
-    } catch {
+    } catch(err) {
       return res.status(500).json({ error: err.message });
     }
   }
@@ -75,7 +74,7 @@ class UserController {
       }
       await users.destroy();
       res.json(500).json({ message: "success" });
-    } catch {
+    } catch(err) {
       return res.status(500).json({ error: err.message });
     }
   }
